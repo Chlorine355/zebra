@@ -1,3 +1,3 @@
 import { View } from "react-native"
 
-export const ReportPage = () => {return <View/>}
+export const ReportListPage = () => {return <View/>}
