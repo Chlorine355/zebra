@@ -10,6 +10,10 @@ import { RatingPage } from './src/pages/RatingPage/RatingPage';
 import { AuthPage } from './src/pages/AuthPage/AuthPage';
 import { SingleReportPage } from './src/pages/SingleReportPage/SingleReportPage';
 import { ReportPage2 } from './src/pages/ReportPage/components/ReportPage2';
+import { YamapInstance } from 'react-native-yamap-plus';
+import { REACT_APP_YAMAP_KEY } from '@env'
+
+YamapInstance.init(REACT_APP_YAMAP_KEY);
 
 const MainStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

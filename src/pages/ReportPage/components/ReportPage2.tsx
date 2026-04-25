@@ -1,20 +1,18 @@
-import { Button, KeyboardAvoidingView, TextInput, TextStyle, View, ViewStyle } from "react-native"
+import { Button, KeyboardAvoidingView, Text, TextInput, TextStyle, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
 import React, { useState } from "react"
-import YaMap from "react-native-yamap";
-
-
-YaMap.init('');
+import { Yamap } from 'react-native-yamap-plus';
 
 
 export const ReportPage2 = () => {
 
     const [description, setDescription] = useState('');
 
-    return <KeyboardAvoidingView style={pageStyle} behavior="height">
+    return <KeyboardAvoidingView style={pageStyle}>
         <View style={styles.item}>
             {/* TODO: opens map */}
-            <YaMap style={styles.map} />
+            <Text style={styles.label}>Выберите геолокацию</Text>
+            <Yamap style={styles.map} />
         </View>
         <View style={styles.item}>
             <TextInput value={description} onChangeText={setDescription} multiline numberOfLines={5} placeholder={'Подробное описание (необязательно)'} />
@@ -36,6 +34,8 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         color: 'gray'
     },
     map: {
-        width: '100%'
+        width: '100%',
+        height: 200,
+        borderRadius: 24,
     }
 }
