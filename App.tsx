@@ -18,8 +18,8 @@ const ReportStack = createNativeStackNavigator();
 
 const ReportStackNavigator = () => {
   return <ReportStack.Navigator>
-    <ReportStack.Screen name="Report1" options={{ title: 'Сообщить о нарушении', headerShown: false }} component={ReportPage1} />
-    <ReportStack.Screen name="Report2" options={{ title: 'Детали', headerShown: false }} component={ReportPage2} />
+    <ReportStack.Screen name="Report1" options={{ title: 'Сообщить о нарушении' }} component={ReportPage1} />
+    <ReportStack.Screen name="Report2" options={{ title: 'Детали', headerBackButtonMenuEnabled: true }} component={ReportPage2} />
   </ReportStack.Navigator>
 }
 
@@ -27,7 +27,7 @@ const ReportStackNavigator = () => {
 const TabNavigator = () => {
   // TODO: добавить иконки и убрать надписи из вкладок
   return <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true }}>
-    <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении' }} component={ReportStackNavigator} />
+    <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении', headerShown: false }} component={ReportStackNavigator} />
     <Tab.Screen name="Reports" options={{ title: 'Сообщения', headerTitle: 'Мои сообщения' }} component={ReportListPage} />
     <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Рейтинг граждан' }} component={RatingPage} />
     <Tab.Screen name="Settings" options={{ title: 'Настройки', headerTitle: 'Настройки и профиль' }} component={SettingsPage} />

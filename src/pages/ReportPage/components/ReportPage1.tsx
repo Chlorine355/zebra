@@ -15,6 +15,7 @@ export const ReportPage1 = () => {
 
     return <KeyboardAvoidingView style={pageStyle} behavior="height">
         <View style={styles.item}>
+            {/* populate list */}
             <Text style={styles.label}>Вид нарушения</Text>
             <Picker
                 selectedValue={violation}
