@@ -10,12 +10,15 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native/new-app-screen": "0.85.2",
-    "@react-navigation/bottom-tabs": "^7.15.10",
-    "@react-navigation/stack": "^7.8.11",
+    "@react-native-picker/picker": "^2.11.4",
+    "@react-navigation/bottom-tabs": "^6.5.9",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
     "react": "19.2.3",
     "react-native": "0.85.2",
-    "react-native-safe-area-context": "^5.5.2"
+    "react-native-date-picker": "^5.0.13",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "^4.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
