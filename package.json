@@ -17,8 +17,10 @@
     "react": "19.2.3",
     "react-native": "0.85.2",
     "react-native-date-picker": "^5.0.13",
+    "react-native-image-picker": "^8.2.1",
     "react-native-safe-area-context": "*",
-    "react-native-screens": "^4.24.0"
+    "react-native-screens": "^4.24.0",
+    "react-native-yamap": "^4.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
