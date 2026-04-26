@@ -20,6 +20,7 @@ export const ReportPage1 = () => {
             {/* populate list */}
             <Text style={styles.label}>Вид нарушения</Text>
             <Picker
+                numberOfLines={6}
                 selectedValue={violation}
                 onValueChange={(itemValue, _) =>
                     setViolation(itemValue)
