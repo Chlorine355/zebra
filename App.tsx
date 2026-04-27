@@ -39,7 +39,7 @@ const TabNavigator = () => {
   return <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true, tabBarShowLabel: false }}>
     <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении', headerShown: false, tabBarIcon: MegaphoneIcon, }} component={ReportStackNavigator} />
     <Tab.Screen name="Reports" options={{ title: 'Сообщения', headerTitle: 'Мои сообщения', tabBarIcon: ReportsIcon, }} component={ReportListPage} />
-    <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Рейтинг граждан', tabBarIcon: RatingIcon, }} component={RatingPage} />
+    <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Рейтинг и статистика', tabBarIcon: RatingIcon, }} component={RatingPage} />
     <Tab.Screen name="Settings" options={{ title: 'Настройки', headerTitle: 'Настройки и профиль', tabBarIcon: SettingsIcon, }} component={SettingsPage} />
   </Tab.Navigator>
 }
