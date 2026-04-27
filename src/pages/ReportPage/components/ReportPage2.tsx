@@ -7,6 +7,7 @@ import { $reportStore } from "../../../features/report/model/store/store";
 import { changeReportStoreEv } from "../../../features/report/model/store/actions";
 
 
+
 export const ReportPage2 = () => {
     const report = useUnit($reportStore);
     const mapRef = useRef<YamapRef>(null);

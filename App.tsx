@@ -12,6 +12,7 @@ import { SingleReportPage } from './src/pages/SingleReportPage/SingleReportPage'
 import { ReportPage2 } from './src/pages/ReportPage/components/ReportPage2';
 import { YamapInstance } from 'react-native-yamap-plus';
 import { REACT_APP_YAMAP_KEY } from '@env'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 YamapInstance.init(REACT_APP_YAMAP_KEY);
 
@@ -27,14 +28,19 @@ const ReportStackNavigator = () => {
   </ReportStack.Navigator>
 }
 
+const MegaphoneIcon = ({ focused }: { focused: boolean }) => <Icon name={focused ? 'megaphone' : 'megaphone-outline'} size={24} />;
+const ReportsIcon = ({ focused }: { focused: boolean }) => <Icon name={focused ? 'list' : 'list-outline'} size={24} />;
+const RatingIcon = ({ focused }: { focused: boolean }) => <Icon name={focused ? 'bar-chart' : 'bar-chart-outline'} size={24} />;
+const SettingsIcon = ({ focused }: { focused: boolean }) => <Icon name={focused ? 'settings' : 'settings-outline'} size={24} />;
+
 
 const TabNavigator = () => {
   // TODO: добавить иконки и убрать надписи из вкладок
-  return <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true }}>
-    <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении', headerShown: false }} component={ReportStackNavigator} />
-    <Tab.Screen name="Reports" options={{ title: 'Сообщения', headerTitle: 'Мои сообщения' }} component={ReportListPage} />
-    <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Рейтинг граждан' }} component={RatingPage} />
-    <Tab.Screen name="Settings" options={{ title: 'Настройки', headerTitle: 'Настройки и профиль' }} component={SettingsPage} />
+  return <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true, tabBarShowLabel: false }}>
+    <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении', headerShown: false, tabBarIcon: MegaphoneIcon, }} component={ReportStackNavigator} />
+    <Tab.Screen name="Reports" options={{ title: 'Сообщения', headerTitle: 'Мои сообщения', tabBarIcon: ReportsIcon, }} component={ReportListPage} />
+    <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Рейтинг граждан', tabBarIcon: RatingIcon, }} component={RatingPage} />
+    <Tab.Screen name="Settings" options={{ title: 'Настройки', headerTitle: 'Настройки и профиль', tabBarIcon: SettingsIcon, }} component={SettingsPage} />
   </Tab.Navigator>
 }
 

@@ -1,6 +1,6 @@
 import { createStore } from "effector";
 import { ReportDataType } from "../data";
-import { addImagesEv, changeReportStoreEv } from "./actions";
+import { addImagesEv, changeReportStoreEv, removeImageEv } from "./actions";
 
 
 
@@ -19,5 +19,9 @@ $reportStore
     .on(addImagesEv, (state, payload) => ({
         ...state,
         images: [...state.images ?? [], ...payload]
+    }))
+    .on(removeImageEv, (state, payload) => ({
+        ...state,
+        images: state.images ? state.images?.filter((image) => image.uri !== payload) : null,
     }))
 

@@ -1,4 +1,4 @@
-import { Button, FlatList, Image, ImageStyle, ScrollView, Text, TextStyle, View, ViewStyle } from "react-native"
+import { Button, FlatList, Image, ImageStyle, ScrollView, Text, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
 import React from "react"
 import { Picker } from '@react-native-picker/picker';
@@ -8,7 +8,8 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from "@react-navigation/native";
 import { $reportStore } from "../../../features/report/model/store/store";
 import { useUnit } from "effector-react";
-import { addImagesEv, changeReportStoreEv } from "../../../features/report/model/store/actions";
+import { addImagesEv, changeReportStoreEv, removeImageEv } from "../../../features/report/model/store/actions";
+import Icon from "react-native-vector-icons/Ionicons";
 
 
 export const ReportPage1 = () => {
@@ -41,9 +42,15 @@ export const ReportPage1 = () => {
             <FlatList
                 data={report.images}
                 horizontal
+                keyExtractor={(image) => image.uri ?? image.id ?? ''}
                 renderItem={
                     (image) =>
-                        <Image style={styles.img as ImageStyle} source={{ uri: image.item.uri }} />
+                        <View style={styles.imageContainer}>
+                            <Image style={styles.img as ImageStyle} source={{ uri: image.item.uri }} />
+                            <TouchableOpacity style={styles.closeIcon} activeOpacity={0.5} onPress={() => image.item.uri && removeImageEv(image.item.uri)}>
+                                <Icon name='close' size={24} color='white' />
+                            </TouchableOpacity>
+                        </View>
                 }
                 contentContainerStyle={styles.images} />
         </View> : null}
@@ -81,5 +88,15 @@ const styles: Record<string, ViewStyle | TextStyle | ImageStyle> = {
     images: {
         flexDirection: 'row',
         gap: 4,
+    },
+    imageContainer: {
+        position: 'relative'
+    },
+    closeIcon: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        borderRadius: 50,
     }
 }
