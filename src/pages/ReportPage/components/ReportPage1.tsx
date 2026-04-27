@@ -1,17 +1,18 @@
 import { Button, FlatList, Image, ImageStyle, ScrollView, Text, TextStyle, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
-import React, { useState } from "react"
+import React from "react"
 import { Picker } from '@react-native-picker/picker';
 import { VIOLATION_OPTIONS } from "../../../shared/data/common";
 import DatePicker from 'react-native-date-picker'
-import { Asset, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from "@react-navigation/native";
+import { $reportStore } from "../../../features/report/model/store/store";
+import { useUnit } from "effector-react";
+import { addImagesEv, changeReportStoreEv } from "../../../features/report/model/store/actions";
 
 
 export const ReportPage1 = () => {
-    const [violation, setViolation] = useState();
-    const [date, setDate] = useState(new Date());
-    const [images, setImages] = useState<Asset[]>([]);
+    const report = useUnit($reportStore);
     const navigation = useNavigation();
 
 
@@ -21,9 +22,9 @@ export const ReportPage1 = () => {
             <Text style={styles.label}>Вид нарушения</Text>
             <Picker
                 numberOfLines={6}
-                selectedValue={violation}
+                selectedValue={report.violation}
                 onValueChange={(itemValue, _) =>
-                    setViolation(itemValue)
+                    changeReportStoreEv({ violation: itemValue })
                 }>
                 {VIOLATION_OPTIONS.map((option) => <Picker.Item label={option.label} value={option.value} />)}
             </Picker>
@@ -31,14 +32,14 @@ export const ReportPage1 = () => {
         <View style={styles.item}>
             <Text style={styles.label}>Дата и время</Text>
             <DatePicker
-                date={date}
-                onConfirm={setDate}
+                date={report.date ?? new Date()}
+                onDateChange={(date) => changeReportStoreEv({ date })}
             />
         </View>
-        {images.length ? <View style={[styles.item]}>
+        {report.images?.length ? <View style={[styles.item]}>
             {/* TODO: opens dialog: снимок с камеры или выбрать из галереи */}
             <FlatList
-                data={images}
+                data={report.images}
                 horizontal
                 renderItem={
                     (image) =>
@@ -48,10 +49,10 @@ export const ReportPage1 = () => {
         </View> : null}
         <View style={styles.item}>
             {/* TODO: opens dialog: снимок с камеры или выбрать из галереи */}
-            <Button title={images.length ? 'Добавить изображения' : "Приложить изображения"}
+            <Button title={report.images?.length ? 'Добавить изображения' : "Приложить изображения"}
                 onPress={() => {
                     launchImageLibrary({ mediaType: 'photo', selectionLimit: 5 },
-                        (pickerResponse) => setImages((prev) => [...prev, ...pickerResponse?.assets ?? []]))
+                        (pickerResponse) => { if (pickerResponse.assets) addImagesEv(pickerResponse.assets) })
                 }} />
         </View>
         <View style={[styles.item, styles.sendButton]}>
