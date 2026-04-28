@@ -1,12 +1,12 @@
 import { createStore } from "effector";
 import { ReportDataType } from "../data";
-import { addImagesEv, changeReportStoreEv, removeImageEv } from "./actions";
+import { addImagesEv, changeReportStoreEv, removeImageEv, sendReportFx } from "./actions";
 
 
 
 const INITIAL_DATA: ReportDataType = {
     violation: null,
-    date: null,
+    date: new Date(),
     images: null,
     description: null,
     coords: null
@@ -24,4 +24,5 @@ $reportStore
         ...state,
         images: state.images ? state.images?.filter((image) => image.uri !== payload) : null,
     }))
+    .reset(sendReportFx.done)
 

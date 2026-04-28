@@ -23,6 +23,7 @@ export const ReportPage1 = () => {
             <Text style={styles.label}>Вид нарушения</Text>
             <Picker
                 numberOfLines={6}
+                placeholder="Не выбрано"
                 selectedValue={report.violation}
                 onValueChange={(itemValue, _) =>
                     changeReportStoreEv({ violation: itemValue })
@@ -58,7 +59,7 @@ export const ReportPage1 = () => {
             {/* TODO: opens dialog: снимок с камеры или выбрать из галереи */}
             <Button title={report.images?.length ? 'Добавить файлы' : "Приложить фото или видео"}
                 onPress={() => {
-                    launchImageLibrary({ mediaType: 'mixed', selectionLimit: 5 },
+                    launchImageLibrary({ mediaType: 'mixed', selectionLimit: 5, includeBase64: true },
                         (pickerResponse) => { if (pickerResponse.assets) addImagesEv(pickerResponse.assets) })
                 }} />
         </View>

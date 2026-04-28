@@ -1,19 +1,24 @@
-import { Button, KeyboardAvoidingView, Text, TextInput, TextStyle, View, ViewStyle } from "react-native"
+import { Button, KeyboardAvoidingView, Text, TextInput, TextStyle, ToastAndroid, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
 import React, { useRef } from "react"
 import { Circle, Yamap, YamapRef } from 'react-native-yamap-plus';
 import { useUnit } from "effector-react";
 import { $reportStore } from "../../../features/report/model/store/store";
-import { changeReportStoreEv } from "../../../features/report/model/store/actions";
-
+import { changeReportStoreEv, sendReportFx } from "../../../features/report/model/store/actions";
+import { validateReport } from "../../../features/report/helpers/validate";
 
 
 export const ReportPage2 = () => {
-    const report = useUnit($reportStore);
+    const { report, isLoading } = useUnit({ report: $reportStore, isLoading: sendReportFx.pending });
     const mapRef = useRef<YamapRef>(null);
     const mapPressHandler = (event: any) => {
         const { lat, lon } = event.nativeEvent;
         changeReportStoreEv({ coords: { lat, lon } })
+    }
+
+    const sendHandler = () => {
+        const validationResult = validateReport(report);
+        if (validationResult.isValid) sendReportFx(report).then(() => ToastAndroid.show('Отправлено!', 2000)); else ToastAndroid.show(validationResult.message || 'Проверьте заполнение всех полей!', 2000)
     }
 
     return <KeyboardAvoidingView style={pageStyle}>
@@ -32,7 +37,8 @@ export const ReportPage2 = () => {
                     zoom: 10,
                     azimuth: 0,
                 }}
-                onMapPress={mapPressHandler} >{report.coords && <Circle center={report.coords} radius={6.7} fillColor="transparent" strokeColor="red" strokeWidth={1} />
+                onMapPress={mapPressHandler} >
+                {report.coords && <Circle center={report.coords} radius={6.7} fillColor="transparent" strokeColor="red" strokeWidth={1} />
                 }</Yamap>
         </View>
         <View style={styles.item}>
@@ -40,7 +46,7 @@ export const ReportPage2 = () => {
         </View>
         <View style={styles.item}>
             {/* TODO: send iiiit */}
-            <Button title="Отправить" />
+            <Button title={isLoading ? 'Отправка...' : "Отправить"} onPress={sendHandler} />
         </View>
     </KeyboardAvoidingView>
 }
