@@ -13,6 +13,7 @@ import { ReportPage2 } from './src/pages/ReportPage/components/ReportPage2';
 import { YamapInstance } from 'react-native-yamap-plus';
 import { REACT_APP_YAMAP_KEY } from '@env'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SplashPage } from './src/pages/SplashPage/SplashPage';
 
 YamapInstance.init(REACT_APP_YAMAP_KEY);
 
@@ -39,7 +40,7 @@ const TabNavigator = () => {
   return <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true, tabBarShowLabel: false }}>
     <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении', headerShown: false, tabBarIcon: MegaphoneIcon, }} component={ReportStackNavigator} />
     <Tab.Screen name="Reports" options={{ title: 'Сообщения', headerTitle: 'Мои сообщения', tabBarIcon: ReportsIcon, }} component={ReportListPage} />
-    <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Рейтинг и статистика', tabBarIcon: RatingIcon, }} component={RatingPage} />
+    <Tab.Screen name="Rating" options={{ title: 'Рейтинг', headerTitle: 'Статистика', tabBarIcon: RatingIcon, }} component={RatingPage} />
     <Tab.Screen name="Settings" options={{ title: 'Настройки', headerTitle: 'Настройки и профиль', tabBarIcon: SettingsIcon, }} component={SettingsPage} />
   </Tab.Navigator>
 }
@@ -47,6 +48,7 @@ const TabNavigator = () => {
 const MainStackNavigator = () => {
   return (
     <MainStack.Navigator>
+      <MainStack.Screen name='Splash' options={{ title: 'Splash', headerShown: false }} component={SplashPage} />
       <MainStack.Screen name="Auth" options={{ title: 'Вход' }} component={AuthPage} />
       <MainStack.Screen name="Tabs" options={{ title: 'Вкладки', headerShown: false }} component={TabNavigator} />
       <MainStack.Screen name="SingleReport" options={{ title: 'Сообщение' }} component={SingleReportPage} />

@@ -1,11 +1,12 @@
 import { Button, KeyboardAvoidingView, Text, TextInput, TextStyle, ToastAndroid, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
-import React, { useRef } from "react"
-import { Circle, Yamap, YamapRef } from 'react-native-yamap-plus';
+import React, { useEffect, useRef } from "react"
+import { Marker, Yamap, YamapRef } from 'react-native-yamap-plus';
 import { useUnit } from "effector-react";
 import { $reportStore } from "../../../features/report/model/store/store";
 import { changeReportStoreEv, sendReportFx } from "../../../features/report/model/store/actions";
 import { validateReport } from "../../../features/report/helpers/validate";
+import Icon from "react-native-vector-icons/Ionicons";
 
 
 export const ReportPage2 = () => {
@@ -20,6 +21,13 @@ export const ReportPage2 = () => {
         const validationResult = validateReport(report);
         if (validationResult.isValid) sendReportFx(report).then(() => ToastAndroid.show('Отправлено!', 2000)); else ToastAndroid.show(validationResult.message || 'Проверьте заполнение всех полей!', 2000)
     }
+
+    useEffect(() => {
+        mapRef.current?.getCameraPosition(({ zoom }) => {
+            if (report.coords)
+                mapRef.current?.setCenter(report.coords, zoom, 0, 0, 0.3)
+        })
+    }, [report.coords])
 
     return <KeyboardAvoidingView style={pageStyle}>
         <View style={styles.item}>
@@ -38,11 +46,11 @@ export const ReportPage2 = () => {
                     azimuth: 0,
                 }}
                 onMapPress={mapPressHandler} >
-                {report.coords && <Circle center={report.coords} radius={6.7} fillColor="transparent" strokeColor="red" strokeWidth={1} />
+                {report.coords && <Marker point={report.coords} visible zIndex={1000}><Icon style={styles.marker} size={24} name="location" color={'red'} /></Marker>
                 }</Yamap>
         </View>
         <View style={styles.item}>
-            <TextInput value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание (необязательно)'} />
+            <TextInput value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание'} />
         </View>
         <View style={styles.item}>
             {/* TODO: send iiiit */}
@@ -64,5 +72,9 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         width: '100%',
         height: 200,
         borderRadius: 24,
+    },
+    marker: {
+        width: 24,
+        height: 24,
     }
 }
