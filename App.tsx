@@ -14,10 +14,11 @@ import { YamapInstance } from 'react-native-yamap-plus';
 import { REACT_APP_YAMAP_KEY } from '@env'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SplashPage } from './src/pages/SplashPage/SplashPage';
+import { MainStackNavigationTemplate } from './src/shared/data/types';
 
 YamapInstance.init(REACT_APP_YAMAP_KEY);
 
-const MainStack = createNativeStackNavigator();
+const MainStack = createNativeStackNavigator<MainStackNavigationTemplate>();
 const Tab = createBottomTabNavigator();
 
 const ReportStack = createNativeStackNavigator();

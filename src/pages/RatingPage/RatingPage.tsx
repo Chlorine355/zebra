@@ -32,7 +32,6 @@ export const RatingPage = () => {
                 <Item value={data?.processing} label="На рассмотрении ГАИ" />
                 <Item value={data?.denied_at_gai} label="Отклонено ГАИ" valueStyle={styles.text_warning} />
                 <Item value={data?.denied_by_admin} label="Предупреждения" valueStyle={styles.text_danger} />
-
             </View>}
     </View>
 }

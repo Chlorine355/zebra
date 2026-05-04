@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react"
 import { ReportCardsResponse } from "./model/types"
 import { loadReportCardsData } from "./lib/helpers"
 import { STATUS_COLORS, STATUS_LABELS } from "../../shared/data/common"
+import { LocalNavigationProp } from "../../shared/data/types"
 
-export const ReportListPage = () => {
+export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
     const [data, setData] = useState<ReportCardsResponse | null>(null)
     const [isLoading, setLoading] = useState(true);
 
@@ -21,7 +22,7 @@ export const ReportListPage = () => {
             : <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
                 (item) =>
                 (
-                    <TouchableNativeFeedback style={styles.wrapper} onPress={() => console.log(item.item.id)}>
+                    <TouchableNativeFeedback style={styles.wrapper} onPress={() => navigation.navigate('SingleReport', { id: item.item.id })}>
                         <View style={styles.card}>
                             <View style={styles.top}>
                                 <Text style={styles.bold}>№ {item.item.id}</Text>
