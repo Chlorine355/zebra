@@ -9,7 +9,8 @@ const INITIAL_DATA: ReportDataType = {
     date: new Date(),
     images: null,
     description: null,
-    coords: null
+    coords: null,
+    agree: false,
 }
 
 export const $reportStore = createStore<ReportDataType>(INITIAL_DATA);

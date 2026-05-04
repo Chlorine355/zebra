@@ -19,7 +19,11 @@ export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp
     }, [])
     return <View style={styles.page}>
         {isLoading
-            ? <Text>Загрузка...</Text>
+            ? <View style={styles.placeholder}>
+                <Text style={styles.placeholderText}>
+                    Загрузка...
+                </Text>
+            </View>
             : data?.length ? <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
                 (item) => {
 

@@ -7,4 +7,5 @@ export const pageStyle: ViewStyle = {
     display: 'flex',
     flexDirection: 'column',
     rowGap: 12,
+    overflow: 'hidden',
 }

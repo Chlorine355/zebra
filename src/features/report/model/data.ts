@@ -6,4 +6,5 @@ export type ReportDataType = {
     images: Asset[] | null;
     description: string | null;
     coords: { lat: number; lon: number } | null;
+    agree: boolean;
 }

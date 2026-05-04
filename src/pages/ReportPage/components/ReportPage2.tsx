@@ -7,6 +7,7 @@ import { $reportStore } from "../../../features/report/model/store/store";
 import { changeReportStoreEv, sendReportFx } from "../../../features/report/model/store/actions";
 import { validateReport } from "../../../features/report/helpers/validate";
 import Icon from "react-native-vector-icons/Ionicons";
+import CheckBox from "@react-native-community/checkbox";
 
 
 export const ReportPage2 = () => {
@@ -29,7 +30,7 @@ export const ReportPage2 = () => {
         })
     }, [report.coords])
 
-    return <KeyboardAvoidingView style={pageStyle}>
+    return <KeyboardAvoidingView style={{ ...pageStyle, ...styles.page }}>
         <View style={styles.item}>
             <Text style={styles.label}>Выберите геолокацию</Text>
             <Yamap style={styles.map}
@@ -50,11 +51,14 @@ export const ReportPage2 = () => {
                 }</Yamap>
         </View>
         <View style={styles.item}>
-            <TextInput value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание'} />
+            <TextInput style={styles.textarea} value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание'} />
+        </View>
+        <View style={styles.horizontalItem}>
+            <CheckBox value={report.agree} onValueChange={(value) => changeReportStoreEv({ agree: value })} />
+            <Text style={styles.warning}>Подтверждаю правильность введённых данных и предупрежден(а) об ответственности за ложный донос</Text>
         </View>
         <View style={styles.item}>
-            {/* TODO: send iiiit */}
-            <Button title={isLoading ? 'Отправка...' : "Отправить"} onPress={sendHandler} />
+            <Button title={isLoading ? 'Отправка...' : "Отправить"} onPress={sendHandler} disabled={!report.agree} />
         </View>
     </KeyboardAvoidingView>
 }
@@ -76,5 +80,23 @@ const styles: Record<string, ViewStyle | TextStyle> = {
     marker: {
         width: 24,
         height: 24,
+    },
+    warning: {
+        color: 'gray',
+        width: '80%',
+    },
+    horizontalItem: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+    textarea: {
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: 'gray',
+    },
+    page: {
+        rowGap: 24,
     }
 }
