@@ -1,3 +1,5 @@
+import { ReportStatusEnum } from "./types"
+
 export const VIOLATION_OPTIONS = [
     { value: null, label: 'Не выбрано' },
     { value: 1, label: 'Остановка или парковка в запрещенном месте' },
@@ -97,3 +99,19 @@ export const VIOLATION_OPTIONS = [
     },
     { value: 33, label: 'Другое' }
 ]
+
+export const STATUS_LABELS = {
+    [ReportStatusEnum.pending]: 'Ожидание',
+    [ReportStatusEnum.deniedByAdmin]: 'Отказано',
+    [ReportStatusEnum.processing]: 'В обработке',
+    [ReportStatusEnum.acceptedAtGAI]: 'Принято',
+    [ReportStatusEnum.deniedAtGAI]: 'Отказано в ГАИ',
+}
+
+export const STATUS_COLORS = {
+    [ReportStatusEnum.pending]: 'gray',
+    [ReportStatusEnum.deniedByAdmin]: 'crimson',
+    [ReportStatusEnum.processing]: 'gray',
+    [ReportStatusEnum.acceptedAtGAI]: 'green',
+    [ReportStatusEnum.deniedAtGAI]: 'orange',
+}

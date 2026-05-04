@@ -1,4 +1,84 @@
-import { Text, View } from "react-native"
-import { pageStyle } from "../../shared/assets/styles/Pages"
+import { FlatList, Text, TextStyle, TouchableNativeFeedback, View, ViewStyle } from "react-native"
+import React, { useEffect, useState } from "react"
+import { ReportCardsResponse } from "./model/types"
+import { loadReportCardsData } from "./lib/helpers"
+import { STATUS_COLORS, STATUS_LABELS } from "../../shared/data/common"
 
-export const ReportListPage = () => {return <View style={pageStyle}><Text>Страница списка сообщений</Text></View>}
+export const ReportListPage = () => {
+    const [data, setData] = useState<ReportCardsResponse | null>(null)
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(() => {
+        loadReportCardsData().then((response) => {
+            setData(response);
+        }).finally(() => {
+            setLoading(false)
+        })
+    }, [])
+    return <View style={styles.page}>
+        {isLoading
+            ? <Text>Загрузка...</Text>
+            : <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
+                (item) =>
+                (
+                    <TouchableNativeFeedback style={styles.wrapper} onPress={() => console.log(item.item.id)}>
+                        <View style={styles.card}>
+                            <View style={styles.top}>
+                                <Text style={styles.bold}>№ {item.item.id}</Text>
+                                <View style={styles.status}>
+                                    <View style={[styles.circle, { backgroundColor: STATUS_COLORS[item.item.status] }]} />
+                                    <Text>{STATUS_LABELS[item.item.status]}</Text>
+                                </View>
+                            </View>
+                            <View style={styles.main}>
+                                <Text>{item.item.violation}</Text>
+                                <Text>{item.item.datetime}</Text>
+                            </View>
+                        </View>
+                    </TouchableNativeFeedback>)} keyExtractor={(item) => String(item.id)} />}
+    </View>
+}
+
+const styles: Record<string, ViewStyle | TextStyle> = {
+    bold: {
+        fontWeight: 500,
+    },
+    card: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'white',
+        elevation: 6,
+    },
+    top: {
+        borderBottomWidth: 1,
+        borderBottomColor: 'gray',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 16,
+    },
+    main: {
+        padding: 16,
+        flexGrow: 1,
+    },
+    page: {
+        display: 'flex',
+        flexDirection: 'column',
+        rowGap: 12,
+    },
+    paddedList: {
+        padding: 20,
+        gap: 12,
+    },
+    circle: {
+        width: 8,
+        height: 8,
+        borderRadius: 8,
+    },
+    status: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4
+    }
+}

@@ -13,11 +13,6 @@ const Item = ({ label, valueStyle, value = 0 }: { label: string, value?: number,
 
 export const RatingPage = () => {
     // TODO: in future, add global rating
-    // for now, it's pending (модерация), 
-    // denied (отказано), 
-    // processing (обработка в ГАИ), 
-    // accepted at GAI (принято в ГАИ), 
-    // denied at GAI (отказано в ГАИ)
     const [data, setData] = useState<StatsType | null>(null)
     const [isLoading, setLoading] = useState(true);
 
@@ -32,11 +27,11 @@ export const RatingPage = () => {
         {isLoading
             ? <Text>Загрузка...</Text>
             : <View style={styles.stats}>
-                <Item value={data?.acceptedAtGAI} label="Принято ГАИ" valueStyle={styles.text_success} />
+                <Item value={data?.accepted_at_gai} label="Принято ГАИ" valueStyle={styles.text_success} />
                 <Item value={data?.pending} label="На модерации" />
                 <Item value={data?.processing} label="На рассмотрении ГАИ" />
-                <Item value={data?.deniedAtGAI} label="Отклонено ГАИ" valueStyle={styles.text_warning} />
-                <Item value={data?.deniedByAdmin} label="Предупреждения" valueStyle={styles.text_danger} />
+                <Item value={data?.denied_at_gai} label="Отклонено ГАИ" valueStyle={styles.text_warning} />
+                <Item value={data?.denied_by_admin} label="Предупреждения" valueStyle={styles.text_danger} />
 
             </View>}
     </View>
@@ -52,12 +47,20 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         flexDirection: 'row',
         flexGrow: 1,
         justifyContent: 'space-between',
+        padding: 24,
+        backgroundColor: 'white',
+        borderRadius: 8,
+        elevation: 3,
+
     },
     item_label: {
         fontSize: 16,
+        fontWeight: 500,
+
     },
     item_value: {
         fontSize: 16,
+        fontWeight: 500,
     },
     text_success: {
         color: 'green'
