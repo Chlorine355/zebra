@@ -4,6 +4,7 @@ import { ReportCardsResponse } from "./model/types"
 import { loadReportCardsData } from "./lib/helpers"
 import { STATUS_COLORS, STATUS_LABELS } from "../../shared/data/common"
 import { LocalNavigationProp } from "../../shared/data/types"
+import { getDateTimeString } from "../../shared/lib/getDateTimeString"
 
 export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
     const [data, setData] = useState<ReportCardsResponse | null>(null)
@@ -20,23 +21,25 @@ export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp
         {isLoading
             ? <Text>Загрузка...</Text>
             : <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
-                (item) =>
-                (
-                    <TouchableNativeFeedback style={styles.wrapper} onPress={() => navigation.navigate('SingleReport', { id: item.item.id })}>
-                        <View style={styles.card}>
-                            <View style={styles.top}>
-                                <Text style={styles.bold}>№ {item.item.id}</Text>
-                                <View style={styles.status}>
-                                    <View style={[styles.circle, { backgroundColor: STATUS_COLORS[item.item.status] }]} />
-                                    <Text>{STATUS_LABELS[item.item.status]}</Text>
+                (item) => {
+
+                    return (
+                        <TouchableNativeFeedback style={styles.wrapper} onPress={() => navigation.navigate('SingleReport', { id: item.item.id })}>
+                            <View style={styles.card}>
+                                <View style={styles.top}>
+                                    <Text style={styles.bold}>№ {item.item.id}</Text>
+                                    <View style={styles.status}>
+                                        <View style={[styles.circle, { backgroundColor: STATUS_COLORS[item.item.status] }]} />
+                                        <Text>{STATUS_LABELS[item.item.status]}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.main}>
+                                    <Text>{item.item.violation}</Text>
+                                    <Text style={styles.date}>{getDateTimeString(new Date(item.item.datetime))}</Text>
                                 </View>
                             </View>
-                            <View style={styles.main}>
-                                <Text>{item.item.violation}</Text>
-                                <Text>{item.item.datetime}</Text>
-                            </View>
-                        </View>
-                    </TouchableNativeFeedback>)} keyExtractor={(item) => String(item.id)} />}
+                        </TouchableNativeFeedback>)
+                }} keyExtractor={(item) => String(item.id)} />}
     </View>
 }
 
@@ -81,5 +84,8 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 4
+    },
+    date: {
+        textAlign: 'right'
     }
 }
