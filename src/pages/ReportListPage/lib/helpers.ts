@@ -18,15 +18,15 @@ export const loadReportCardsData = async (): Promise<ReportCardsResponse> => {
             violation: VIOLATION_OPTIONS[1].label
         },
         {
-            id: '55',
-            datetime: (new Date()).toISOString(),
-            status: ReportStatusEnum.deniedAtGAI,
-            violation: VIOLATION_OPTIONS[1].label
-        },
-        {
             id: '54',
             datetime: (new Date()).toISOString(),
             status: ReportStatusEnum.processing,
+            violation: VIOLATION_OPTIONS[1].label
+        },
+        {
+            id: '55',
+            datetime: (new Date()).toISOString(),
+            status: ReportStatusEnum.deniedAtGAI,
             violation: VIOLATION_OPTIONS[1].label
         },
         {

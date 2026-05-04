@@ -20,7 +20,7 @@ export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp
     return <View style={styles.page}>
         {isLoading
             ? <Text>Загрузка...</Text>
-            : <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
+            : data?.length ? <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
                 (item) => {
 
                     return (
@@ -39,7 +39,13 @@ export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp
                                 </View>
                             </View>
                         </TouchableNativeFeedback>)
-                }} keyExtractor={(item) => String(item.id)} />}
+                }} keyExtractor={(item) => String(item.id)} /> :
+
+                <View style={styles.placeholder}>
+                    <Text style={styles.placeholderText}>
+                        Вам повезло не встретить ни одного нарушения!
+                    </Text>
+                </View>}
     </View>
 }
 
@@ -87,5 +93,17 @@ const styles: Record<string, ViewStyle | TextStyle> = {
     },
     date: {
         textAlign: 'right'
+    },
+    placeholder: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    placeholderText: {
+        textAlign: 'center',
+        color: 'gray',
+        maxWidth: '60%',
     }
 }

@@ -52,7 +52,7 @@ const MainStackNavigator = () => {
       <MainStack.Screen name='Splash' options={{ title: 'Splash', headerShown: false }} component={SplashPage} />
       <MainStack.Screen name="Auth" options={{ title: 'Вход' }} component={AuthPage} />
       <MainStack.Screen name="Tabs" options={{ title: 'Вкладки', headerShown: false }} component={TabNavigator} />
-      <MainStack.Screen name="SingleReport" options={{ title: 'Сообщение' }} component={SingleReportPage} />
+      <MainStack.Screen name="SingleReport" options={({ route }) => ({ title: `Сообщение №${route.params.id}` })} component={SingleReportPage} />
     </MainStack.Navigator>
   );
 }

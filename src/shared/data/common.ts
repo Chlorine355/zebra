@@ -101,10 +101,10 @@ export const VIOLATION_OPTIONS = [
 ]
 
 export const STATUS_LABELS = {
-    [ReportStatusEnum.pending]: 'Ожидание',
-    [ReportStatusEnum.deniedByAdmin]: 'Отказано',
-    [ReportStatusEnum.processing]: 'В обработке',
-    [ReportStatusEnum.acceptedAtGAI]: 'Принято',
+    [ReportStatusEnum.pending]: 'На модерации',
+    [ReportStatusEnum.deniedByAdmin]: 'Отказано на модерации',
+    [ReportStatusEnum.processing]: 'На рассмотрении ГАИ',
+    [ReportStatusEnum.acceptedAtGAI]: 'Принято ГАИ',
     [ReportStatusEnum.deniedAtGAI]: 'Отказано в ГАИ',
 }
 

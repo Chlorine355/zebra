@@ -3,6 +3,8 @@ import { pageStyle } from "../../shared/assets/styles/Pages"
 import React, { useEffect, useState } from "react"
 import { StatsType } from "./model/types"
 import { loadStatsData } from "./lib/helpers"
+import { STATUS_LABELS } from "../../shared/data/common"
+import { ReportStatusEnum } from "../../shared/data/types"
 
 const Item = ({ label, valueStyle, value = 0 }: { label: string, value?: number, valueStyle?: TextStyle }) => {
     return <View style={styles.item}>
@@ -27,11 +29,11 @@ export const RatingPage = () => {
         {isLoading
             ? <Text>Загрузка...</Text>
             : <View style={styles.stats}>
-                <Item value={data?.accepted_at_gai} label="Принято ГАИ" valueStyle={styles.text_success} />
-                <Item value={data?.pending} label="На модерации" />
-                <Item value={data?.processing} label="На рассмотрении ГАИ" />
-                <Item value={data?.denied_at_gai} label="Отклонено ГАИ" valueStyle={styles.text_warning} />
-                <Item value={data?.denied_by_admin} label="Предупреждения" valueStyle={styles.text_danger} />
+                <Item value={data?.accepted_at_gai} label={STATUS_LABELS[ReportStatusEnum.acceptedAtGAI]} valueStyle={styles.text_success} />
+                <Item value={data?.pending} label={STATUS_LABELS[ReportStatusEnum.pending]} />
+                <Item value={data?.processing} label={STATUS_LABELS[ReportStatusEnum.processing]} />
+                <Item value={data?.denied_at_gai} label={STATUS_LABELS[ReportStatusEnum.deniedAtGAI]} valueStyle={styles.text_warning} />
+                <Item value={data?.denied_by_admin} label={STATUS_LABELS[ReportStatusEnum.deniedByAdmin]} valueStyle={styles.text_danger} />
             </View>}
     </View>
 }
