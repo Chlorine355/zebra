@@ -42,6 +42,7 @@ const styles: Record<string, ViewStyle | TextStyle> = {
     stats: {
         display: 'flex',
         gap: 12,
+        paddingBottom: 20,
     },
     item: {
         display: 'flex',
@@ -52,12 +53,10 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         backgroundColor: 'white',
         borderRadius: 8,
         elevation: 3,
-
     },
     item_label: {
         fontSize: 16,
         fontWeight: 500,
-
     },
     item_value: {
         fontSize: 16,

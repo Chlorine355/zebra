@@ -9,6 +9,8 @@ export const removeImageEv = createEvent<string>()
 
 
 export const sendReportFx = createEffect(async (report: ReportDataType) => {
-    
-    return console.log(report)
+    // send via api
+    report;
+    // return newly acquired id
+    return { id: 55 }
 });

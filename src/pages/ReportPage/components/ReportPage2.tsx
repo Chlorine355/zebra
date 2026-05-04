@@ -8,9 +8,10 @@ import { changeReportStoreEv, sendReportFx } from "../../../features/report/mode
 import { validateReport } from "../../../features/report/helpers/validate";
 import Icon from "react-native-vector-icons/Ionicons";
 import CheckBox from "@react-native-community/checkbox";
+import { LocalNavigationProp } from "../../../shared/data/types";
 
 
-export const ReportPage2 = () => {
+export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp }) => {
     const { report, isLoading } = useUnit({ report: $reportStore, isLoading: sendReportFx.pending });
     const mapRef = useRef<YamapRef>(null);
     const mapPressHandler = (event: any) => {
@@ -20,7 +21,12 @@ export const ReportPage2 = () => {
 
     const sendHandler = () => {
         const validationResult = validateReport(report);
-        if (validationResult.isValid) sendReportFx(report).then(() => ToastAndroid.show('Отправлено!', 2000)); else ToastAndroid.show(validationResult.message || 'Проверьте заполнение всех полей!', 2000)
+        if (validationResult.isValid)
+            sendReportFx(report).then((data) => {
+                ToastAndroid.show('Отправлено!', 2000);
+                navigation.navigate('SingleReport', { id: data.id })
+            });
+        else ToastAndroid.show(validationResult.message || 'Проверьте заполнение всех полей!', 2000)
     }
 
     useEffect(() => {
@@ -55,7 +61,9 @@ export const ReportPage2 = () => {
         </View>
         <View style={styles.horizontalItem}>
             <CheckBox value={report.agree} onValueChange={(value) => changeReportStoreEv({ agree: value })} />
-            <Text style={styles.warning}>Подтверждаю правильность введённых данных и предупрежден(а) об ответственности за ложный донос</Text>
+            <Text style={styles.warning}>
+                Подтверждаю правильность введённых данных и предупрежден(а) об ответственности за ложный донос
+            </Text>
         </View>
         <View style={styles.item}>
             <Button title={isLoading ? 'Отправка...' : "Отправить"} onPress={sendHandler} disabled={!report.agree} />
