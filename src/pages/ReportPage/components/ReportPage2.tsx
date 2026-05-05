@@ -57,7 +57,7 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
                 }</Yamap>
         </View>
         <View style={styles.item}>
-            <TextInput style={styles.textarea} value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание'} />
+            <TextInput style={styles.textarea} value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание...'} />
         </View>
         <View style={styles.horizontalItem}>
             <CheckBox value={report.agree} onValueChange={(value) => changeReportStoreEv({ agree: value })} />
@@ -103,6 +103,7 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         backgroundColor: 'white',
         borderWidth: 1,
         borderColor: 'gray',
+        paddingHorizontal: 12,
     },
     page: {
         rowGap: 24,

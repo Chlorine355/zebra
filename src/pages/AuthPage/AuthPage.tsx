@@ -7,6 +7,6 @@ import { LocalNavigationProp } from "../../shared/data/types"
 export const AuthPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
     return <View style={pageStyle}>
         <Text>Страница авторизации</Text>
-        <Button title="Аминь" onPress={() => { navigation.navigate('Tabs') }} />
+        <Button title="Войти" onPress={() => { navigation.navigate('Tabs') }} />
     </View>
 }
