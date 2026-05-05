@@ -1,27 +1,34 @@
-build-debug:
-   runs-on: ubuntu-latest
-   steps:
-   - name: Checkout code
-     uses: actions/checkout@v2
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
 
-   - name: Set up Node.js
-     uses: actions/setup-node@v2
-     with:
-       node-version: '25'
+jobs:
+  build-debug:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-   - name: Install dependencies
-     run: |
-       npm install
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '25'
 
-   - name: Build the app
-     run: |
-       npx react-native build-android
+    - name: Install dependencies
+      run: |
+        npm install
 
-   - name: Run Tests
-     run: |
-       npm test
-   - name: Upload APK
-     uses: actions/upload-artifact@v3
-     with:
-      name: android-app
-      path: android/app/build/outputs/apk/release/app-debug.apk
+    - name: Build the app
+      run: |
+        npx react-native build-android
+
+    - name: Run Tests
+      run: |
+        npm test
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-app
+        path: android/app/build/outputs/apk/release/app-debug.apk
