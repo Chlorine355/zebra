@@ -1,4 +1,4 @@
-import { ReportDataType } from "../model/data";
+import { ReportDataType } from "../model/types";
 
 type ValidationReturnType = {
     isValid: boolean;

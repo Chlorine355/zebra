@@ -6,7 +6,7 @@ export type MainStackNavigationTemplate = {
     Auth: undefined;
     Tabs: undefined;
     Message: undefined;
-    SingleReport: { id: number | string };
+    SingleReport: { id: number };
 }
 
 export type LocalNavigationProp = NavigationProp<MainStackNavigationTemplate>

@@ -1,6 +1,6 @@
 import { createStore } from "effector";
-import { ReportDataType } from "../data";
 import { addImagesEv, changeReportStoreEv, removeImageEv, sendReportFx } from "./actions";
+import { ReportDataType } from "../types";
 
 
 

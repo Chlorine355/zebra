@@ -1,7 +1,7 @@
 import { ReportStatusEnum } from "../../../shared/data/types";
 
 export type RepordCardResponse = {
-    id: string | number;
+    id: number;
     violation: string;
     datetime: string;
     status: ReportStatusEnum;
