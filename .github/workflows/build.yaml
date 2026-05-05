@@ -22,7 +22,7 @@ jobs:
 
     - name: Build the app
       run: |
-        npx react-native build-android
+        npm run build-debug:android
 
     - name: Run Tests
       run: |

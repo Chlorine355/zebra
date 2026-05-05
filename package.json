@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "build:android": "cd android && ./gradlew assembleDebug"
+    "build-debug:android": "cd android && ./gradlew assembleDebug"
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.20",
