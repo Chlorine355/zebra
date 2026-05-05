@@ -19,6 +19,9 @@ jobs:
     - name: Install dependencies
       run: |
         npm install
+    
+    - name: Change wrapper permissions
+      run: cd android && chmod +x ./gradlew && cd ..
 
     - name: Build the app
       run: |
