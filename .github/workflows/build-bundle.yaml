@@ -1,11 +1,8 @@
 on:
-  push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+  workflow_dispatch:
 
 jobs:
-  build-release:
+  build-bundle:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -26,9 +23,9 @@ jobs:
 
     - name: Build the app
       run: |
-        npm run build-release:android
+        npm run build-bundle:android
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: zebra-release
-        path: android/app/build/outputs/apk/debug/app-release.apk
+        name: zebra-bundle
+        path: android/app/build/outputs/bundle/release/app-release.aab
