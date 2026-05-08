@@ -9,7 +9,8 @@
     "start": "react-native start",
     "test": "jest",
     "build-debug:android": "cd android && ./gradlew assembleDebug",
-    "build-release:android": "cd android && ./gradlew assembleRelease"
+    "build-release:android": "cd android && ./gradlew assembleRelease",
+    "build-bundle:android": "cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.20",
