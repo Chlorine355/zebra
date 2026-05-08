@@ -19,9 +19,9 @@ export type ReportResponse = {
     // from user
     violation: string;
     coords: { lat: number; lon: number };
-    date: string;
+    datetime: string;
     description: string;
-    medias: {
+    assets: {
         type: 'photo' | 'video',
         url: string,
     }[];

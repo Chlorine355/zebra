@@ -70,16 +70,16 @@ export const ReportPage1 = () => {
 }
 
 const styles: Record<string, ViewStyle | TextStyle | ImageStyle> = {
-    item: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8,
-    },
     sendButton: {
         marginTop: 'auto',
     },
     label: {
         color: 'gray'
+    },
+    item: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
     },
     img: {
         width: 100, height: 100,

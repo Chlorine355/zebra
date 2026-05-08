@@ -2,9 +2,9 @@ import { FlatList, Text, TextStyle, TouchableNativeFeedback, View, ViewStyle } f
 import React, { useEffect, useState } from "react"
 import { ReportCardsResponse } from "./model/types"
 import { loadReportCardsData } from "./lib/helpers"
-import { STATUS_COLORS, STATUS_LABELS } from "../../shared/data/common"
 import { LocalNavigationProp } from "../../shared/data/types"
 import { getDateTimeString } from "../../shared/lib/getDateTimeString"
+import { StatusBadge } from "../../widgets/status/StatusBadge"
 
 export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
     const [data, setData] = useState<ReportCardsResponse | null>(null)
@@ -32,10 +32,7 @@ export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp
                             <View style={styles.card}>
                                 <View style={styles.top}>
                                     <Text style={styles.bold}>№ {item.item.id}</Text>
-                                    <View style={styles.status}>
-                                        <View style={[styles.circle, { backgroundColor: STATUS_COLORS[item.item.status] }]} />
-                                        <Text>{STATUS_LABELS[item.item.status]}</Text>
-                                    </View>
+                                    <StatusBadge status={item.item.status} />
                                 </View>
                                 <View style={styles.main}>
                                     <Text>{item.item.violation}</Text>

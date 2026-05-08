@@ -9,11 +9,11 @@ export const loadReportData = async (id: number): Promise<ReportResponse> => {
         creationDate: 'today',
         violation: 'Проезд на красный',
         coords: { lat: 56, lon: 43 },
-        date: 'yesterday',
+        datetime: 'yesterday',
         description: 'Опсиание длинное-длинное',
         status: ReportStatusEnum.pending,
         gosnomer: 'С777ВО152',
         address: null,
-        medias: [],
+        assets: [],
     };
 }
