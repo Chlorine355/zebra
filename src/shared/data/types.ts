@@ -4,6 +4,7 @@ export type MainStackNavigationTemplate = {
     // describes routes and their props
     Splash: undefined;
     Auth: undefined;
+    Signup: undefined;
     Tabs: undefined;
     Message: undefined;
     SingleReport: { id: number };

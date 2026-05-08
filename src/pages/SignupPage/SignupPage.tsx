@@ -1,15 +1,16 @@
-import { View, ViewStyle, Text, TextStyle, TouchableOpacity } from "react-native"
+import { TouchableOpacity, View, ViewStyle, Text, TextStyle } from "react-native"
 import React from "react"
 import { LocalNavigationProp } from "../../shared/data/types"
 import { TextInput } from "react-native"
 
 
-export const AuthPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
+export const SignupPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
     return <View style={styles.page}>
         <TextInput style={styles.input} placeholder="Логин" />
         <TextInput style={styles.input} placeholder="Пароль" secureTextEntry />
-        <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Signup' }] })}>
-            <Text style={styles.link}>Зарегистрироваться</Text>
+        <TextInput style={styles.input} placeholder="Повторите пароль" secureTextEntry />
+        <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Auth' }] })}>
+            <Text style={styles.link}>Уже зарегистрированы? Войти</Text>
         </TouchableOpacity>
     </View>
 }

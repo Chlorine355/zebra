@@ -1,4 +1,4 @@
-import { Button, KeyboardAvoidingView, Text, TextInput, TextStyle, ToastAndroid, View, ViewStyle } from "react-native"
+import { Button, Text, TextInput, TextStyle, ToastAndroid, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
 import React, { useEffect, useRef } from "react"
 import { Marker, Yamap, YamapRef } from 'react-native-yamap-plus';
@@ -36,7 +36,7 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
         })
     }, [report.coords])
 
-    return <KeyboardAvoidingView style={{ ...pageStyle, ...styles.page }}>
+    return <View style={{ ...pageStyle, ...styles.page }}>
         <View style={styles.item}>
             <Text style={styles.label}>Выберите геолокацию</Text>
             <Yamap style={styles.map}
@@ -68,7 +68,7 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
         <View style={styles.item}>
             <Button title={isLoading ? 'Отправка...' : "Отправить"} onPress={sendHandler} disabled={!report.agree} />
         </View>
-    </KeyboardAvoidingView>
+    </View>
 }
 
 const styles: Record<string, ViewStyle | TextStyle> = {

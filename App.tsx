@@ -15,6 +15,7 @@ import { REACT_APP_YAMAP_KEY } from '@env'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SplashPage } from './src/pages/SplashPage/SplashPage';
 import { MainStackNavigationTemplate } from './src/shared/data/types';
+import { SignupPage } from './src/pages/SignupPage/SignupPage';
 
 YamapInstance.init(REACT_APP_YAMAP_KEY);
 
@@ -51,6 +52,7 @@ const MainStackNavigator = () => {
     <MainStack.Navigator>
       <MainStack.Screen name='Splash' options={{ title: 'Splash', headerShown: false }} component={SplashPage} />
       <MainStack.Screen name="Auth" options={{ title: 'Вход' }} component={AuthPage} />
+      <MainStack.Screen name="Signup" options={{ title: 'Регистрация' }} component={SignupPage} />
       <MainStack.Screen name="Tabs" options={{ title: 'Вкладки', headerShown: false }} component={TabNavigator} />
       <MainStack.Screen name="SingleReport" options={({ route }) => ({ title: `Сообщение №${route.params.id}` })} component={SingleReportPage} />
     </MainStack.Navigator>
