@@ -2,12 +2,13 @@ import { Button, Switch, Text, TextStyle, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../shared/assets/styles/Pages"
 import React, { useState } from "react"
 import { LocalNavigationProp } from "../../shared/data/types";
+import { clearAuthInstanceEv } from "../../shared/api/auth/actions";
 
 export const SettingsPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
     // TODO: use value received from backend as default and send it to backend 
     const [sendNotifications, setSendNotifications] = useState<boolean>(true);
     const exitHandler = () => {
-        // delete credentials etc, .then() => 
+        clearAuthInstanceEv();
         navigation.reset({ index: 0, routes: [{ name: 'Auth' }] });
     }
     return <View style={pageStyle}>
