@@ -1,6 +1,6 @@
 import { createEffect, createEvent } from "effector";
 import { Asset } from "react-native-image-picker";
-import { ReportDataType } from "../types";
+import { ReportDataType } from "../../../../shared/data/types";
 
 export const changeReportStoreEv = createEvent<Partial<ReportDataType>>();
 export const addImagesEv = createEvent<Asset[]>()

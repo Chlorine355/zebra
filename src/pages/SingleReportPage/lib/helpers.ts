@@ -1,5 +1,4 @@
-import { ReportStatusEnum } from '../../../shared/data/types';
-import { ReportResponse } from '../../../features/report/model/types'
+import { ReportResponse, ReportStatusEnum } from '../../../shared/data/types';
 
 
 export const loadReportData = async (id: number): Promise<ReportResponse> => {
