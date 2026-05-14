@@ -9,6 +9,7 @@ export const apiLinks = {
     reports: {
         all: '/reports/all',
         one: '/reports/one_by_id',
-        create: '/reports/create'
+        create: '/reports/create',
+        stats: '/reports/stats'
     }
 }

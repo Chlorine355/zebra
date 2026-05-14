@@ -37,6 +37,9 @@ export const apiService = {
         },
         getOne: (data: { id: number }) => {
             return instance().get(apiLinks.reports.one, { params: { report_id: data.id } })
-        }
+        },
+        stats: () => {
+            return instance().get(apiLinks.reports.stats)
+        },
     }
 }

@@ -1,10 +1,11 @@
-import { Text, TextStyle, View, ViewStyle } from "react-native"
+import { Text, TextStyle, View, ViewStyle, Button } from "react-native"
 import { pageStyle } from "../../shared/assets/styles/Pages"
 import React, { useEffect, useState } from "react"
 import { StatsType } from "./model/types"
 import { loadStatsData } from "./lib/helpers"
 import { STATUS_LABELS } from "../../shared/data/common"
 import { ReportStatusEnum } from "../../shared/data/types"
+
 
 const Item = ({ label, valueStyle, value = 0 }: { label: string, value?: number, valueStyle?: TextStyle }) => {
     return <View style={styles.item}>
@@ -18,13 +19,16 @@ export const RatingPage = () => {
     const [data, setData] = useState<StatsType | null>(null)
     const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const fetchdata = () => {
+        setLoading(true)
         loadStatsData().then((response) => {
             setData(response);
         }).finally(() => {
             setLoading(false)
         })
-    }, [])
+    }
+
+    useEffect(fetchdata, [])
     return <View style={pageStyle}>
         {isLoading
             ? <Text>Загрузка...</Text>
@@ -34,6 +38,7 @@ export const RatingPage = () => {
                 <Item value={data?.processing} label={STATUS_LABELS[ReportStatusEnum.processing]} />
                 <Item value={data?.denied_at_gai} label={STATUS_LABELS[ReportStatusEnum.deniedAtGAI]} valueStyle={styles.text_warning} />
                 <Item value={data?.denied_by_admin} label={STATUS_LABELS[ReportStatusEnum.deniedByAdmin]} valueStyle={styles.text_danger} />
+                <Button title='Обновить' onPress={fetchdata} />
             </View>}
     </View>
 }

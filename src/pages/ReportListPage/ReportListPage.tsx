@@ -1,22 +1,26 @@
 import { FlatList, Text, TextStyle, TouchableNativeFeedback, View, ViewStyle } from "react-native"
 import React, { useEffect, useState } from "react"
-import { ReportCardsResponse } from "./model/types"
 import { loadReportCardsData } from "./lib/helpers"
 import { LocalNavigationProp } from "../../shared/data/types"
 import { getDateTimeString } from "../../shared/lib/getDateTimeString"
 import { StatusBadge } from "../../widgets/status/StatusBadge"
+import { RepordCardResponse } from "./model/types"
 
 export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
-    const [data, setData] = useState<ReportCardsResponse | null>(null)
+    const [data, setData] = useState<RepordCardResponse[] | null>(null)
     const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const load = () => {
+        setLoading(true);
         loadReportCardsData().then((response) => {
-            setData(response);
+            setData(response.reports);
         }).finally(() => {
-            setLoading(false)
+            setLoading(false);
         })
-    }, [])
+    }
+
+    useEffect(load, [])
+
     return <View style={styles.page}>
         {isLoading
             ? <View style={styles.placeholder}>
@@ -24,7 +28,7 @@ export const ReportListPage = ({ navigation }: { navigation: LocalNavigationProp
                     Загрузка...
                 </Text>
             </View>
-            : data?.length ? <FlatList contentContainerStyle={styles.paddedList} data={data} renderItem={
+            : data?.length ? <FlatList refreshing={isLoading} onRefresh={load} contentContainerStyle={styles.paddedList} data={data} renderItem={
                 (item) => {
 
                     return (
