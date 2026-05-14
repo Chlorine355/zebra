@@ -26,7 +26,7 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
     }, [id])
 
     return <ScrollView contentContainerStyle={pageStyle}>
-        {isLoading && !data
+        {isLoading || !data
             ? <View style={styles.placeholder}>
                 <Text style={styles.placeholderText}>
                     Загрузка...

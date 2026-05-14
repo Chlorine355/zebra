@@ -24,8 +24,8 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
         if (validationResult.isValid)
             sendReportFx(report).then((data) => {
                 ToastAndroid.show('Отправлено!', 2000);
-                navigation.navigate('SingleReport', { id: data.id })
-            });
+                navigation.navigate('SingleReport', { id: data.report_id })
+            }).catch(() => ToastAndroid.show('При отправке произошла ошибка', 2000));
         else ToastAndroid.show(validationResult.message || 'Проверьте заполнение всех полей!', 2000)
     }
 

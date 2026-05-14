@@ -28,7 +28,7 @@ export const ReportPage1 = () => {
                 onValueChange={(itemValue, _) =>
                     changeReportStoreEv({ violation: itemValue })
                 }>
-                {VIOLATION_OPTIONS.map((option) => <Picker.Item label={option.label} value={option.value} />)}
+                {VIOLATION_OPTIONS.map((option) => <Picker.Item label={option.label} value={option.label} />)}
             </Picker>
         </View>
         <View style={styles.item}>

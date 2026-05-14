@@ -30,10 +30,20 @@ export type ReportDataType = {
     agree: boolean;
 }
 
+export type ReportRequestBodyType = {
+    violation: string; // TODO: make enum
+    datetime: string;
+    assets: Asset[];
+    description: string;
+    lat: number;
+    lon: number;
+    agree: boolean;
+}
+
 export type ReportResponse = {
     // generated on creation
     id: number,
-    creationDate: string;
+    creation_date: string;
     // from user
     violation: string;
     lat: number;

@@ -24,7 +24,7 @@ export const AuthPage = ({ navigation }: { navigation: LocalNavigationProp }) =>
         <TextInput style={styles.input} placeholder="Пароль" secureTextEntry value={password} onChangeText={setPassword} />
         <Button title='Войти' onPress={loginAttempt} />
         <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Signup' }] })}>
-            <Text style={styles.link}>Зарегистрироваться</Text>
+            <Text style={styles.link}>Нет аккаунта? Зарегистрироваться</Text>
         </TouchableOpacity>
     </View>
 }

@@ -1,4 +1,4 @@
-import { ReportDataType } from "../../data/types";
+import { ReportRequestBodyType } from "../../data/types";
 import { apiLinks } from "./apiLinks";
 import { axiosInstance } from "./baseInstance";
 import { REACT_APP_BACKEND_URL } from '@env'
@@ -21,16 +21,12 @@ export const apiService = {
             })
         },
         signup: (data: { username: string, password: string }) => {
-            return instance().post(apiLinks.auth.signup, data, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
+            return instance().post(apiLinks.auth.signup, data)
         }
     },
     reports: {
-        create: (data: ReportDataType) => {
-            return instance().post(apiLinks.reports.all, data)
+        create: (data: ReportRequestBodyType) => {
+            return instance().post(apiLinks.reports.create, data)
         },
         getAll: () => {
             return instance().get(apiLinks.reports.all)
