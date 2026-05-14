@@ -1,18 +1,8 @@
-import { ReportResponse, ReportStatusEnum } from '../../../shared/data/types';
+import { apiService } from '../../../shared/api/service/apiService';
+import { ReportResponse } from '../../../shared/data/types';
 
 
 export const loadReportData = async (id: number): Promise<ReportResponse> => {
     // TODO: replace with fetching by axiosInstance with JWT
-    return {
-        id: id,
-        creationDate: 'today',
-        violation: 'Проезд на красный',
-        coords: { lat: 56, lon: 43 },
-        datetime: 'yesterday',
-        description: 'Опсиание длинное-длинное',
-        status: ReportStatusEnum.pending,
-        gosnomer: 'С777ВО152',
-        address: null,
-        assets: [],
-    };
+    return (await apiService.reports.getOne({ id })).data
 }

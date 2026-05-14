@@ -16,14 +16,15 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
     const [isLoading, setLoading] = useState(true);
     const mapRef = useRef<YamapRef>(null);
 
-
     useEffect(() => {
+        setLoading(true)
         loadReportData(id).then((response) => {
             setData(response);
         }).finally(() => {
             setLoading(false)
         })
     }, [id])
+
     return <ScrollView contentContainerStyle={pageStyle}>
         {isLoading && !data
             ? <View style={styles.placeholder}>
@@ -49,12 +50,12 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
                         mapType={'vector'}
                         fastTapDisabled={false}
                         initialRegion={{
-                            lat: data!.coords.lat,
-                            lon: data!.coords.lon,
+                            lat: data!.lat,
+                            lon: data!.lon,
                             zoom: 16,
                             azimuth: 0,
                         }}>
-                        <Marker point={data!.coords} visible zIndex={1000}><Icon style={styles.marker} size={24} name="location" color={'red'} /></Marker>
+                        <Marker point={{ lat: data!.lat, lon: data!.lon }} visible zIndex={1000}><Icon style={styles.marker} size={24} name="location" color={'red'} /></Marker>
                     </Yamap>
                 </View>
                 <View style={styles.item}>

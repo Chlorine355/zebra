@@ -36,7 +36,8 @@ export type ReportResponse = {
     creationDate: string;
     // from user
     violation: string;
-    coords: { lat: number; lon: number };
+    lat: number;
+    lon: number;
     datetime: string;
     description: string;
     assets: {
