@@ -16,6 +16,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { SplashPage } from './src/pages/SplashPage/SplashPage';
 import { MainStackNavigationTemplate } from './src/shared/data/types';
 import { SignupPage } from './src/pages/SignupPage/SignupPage';
+import { apiService } from './src/shared/api/service/apiService';
+import { setCurrentUserEv } from './src/shared/api/auth/actions';
 
 YamapInstance.init(REACT_APP_YAMAP_KEY);
 
@@ -38,7 +40,9 @@ const SettingsIcon = ({ focused }: { focused: boolean }) => <Icon name={focused 
 
 
 const TabNavigator = () => {
-  // TODO: добавить иконки и убрать надписи из вкладок
+  React.useEffect(() => {
+    apiService.users.current().then(({ data }) => { setCurrentUserEv(data) })
+  }, [])
   return <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true, tabBarShowLabel: false }}>
     <Tab.Screen name="CreateReport" options={{ title: 'Нарушение', headerTitle: 'Сообщить о нарушении', headerShown: false, tabBarIcon: MegaphoneIcon, }} component={ReportStackNavigator} />
     <Tab.Screen name="Reports" options={{ title: 'Сообщения', headerTitle: 'Мои сообщения', tabBarIcon: ReportsIcon, }} component={ReportListPage} />

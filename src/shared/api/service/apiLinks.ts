@@ -4,7 +4,8 @@ export const apiLinks = {
         signup: '/auth/signup'
     },
     users: {
-        current: '/users/current'
+        current: '/users/current',
+        notifications: '/users/notifications'
     },
     reports: {
         all: '/reports/all',

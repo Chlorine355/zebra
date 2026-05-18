@@ -1,20 +1,30 @@
 import { Button, Switch, Text, TextStyle, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../shared/assets/styles/Pages"
-import React, { useState } from "react"
+import React from "react"
 import { LocalNavigationProp } from "../../shared/data/types";
-import { clearAuthInstanceEv } from "../../shared/api/auth/actions";
+import { clearAuthInstanceEv, setCurrentUserEv } from "../../shared/api/auth/actions";
+import { useUnit } from "effector-react";
+import { $currentUser } from "../../shared/api/auth/store";
+import { apiService } from "../../shared/api/service/apiService";
 
 export const SettingsPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
-    // TODO: use value received from backend as default and send it to backend 
-    const [sendNotifications, setSendNotifications] = useState<boolean>(true);
+    const currentUser = useUnit($currentUser)
     const exitHandler = () => {
         clearAuthInstanceEv();
         navigation.reset({ index: 0, routes: [{ name: 'Auth' }] });
     }
+
+    const changeHandler = (value: boolean) => {
+        if (currentUser) {
+            setCurrentUserEv({ ...currentUser, receives_notifications: value })
+            apiService.users.setNotifications({ receives_notifications: value })
+        }
+    }
+
     return <View style={pageStyle}>
         <View style={styles.item}>
             <Text>Включить уведомления</Text>
-            <Switch value={sendNotifications} onValueChange={setSendNotifications} />
+            <Switch value={!!currentUser?.receives_notifications} onValueChange={changeHandler} />
         </View>
         <Button title="Выйти из профиля" onPress={exitHandler} />
     </View>

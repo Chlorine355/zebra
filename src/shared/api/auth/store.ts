@@ -1,5 +1,5 @@
 import { createStore } from "effector";
-import { setAuthInstanceEv, AuthInstanceType, resetAuthInstanceEv, clearAuthInstanceEv } from "./actions";
+import { setAuthInstanceEv, AuthInstanceType, resetAuthInstanceEv, clearAuthInstanceEv, UserType, setCurrentUserEv } from "./actions";
 import { createMMKV } from 'react-native-mmkv';
 
 
@@ -27,3 +27,5 @@ $authInstance.watch(({ username, password, token }) => {
     storage.set('password', password || '');
     storage.set('token', token || '');
 })
+
+export const $currentUser = createStore<UserType | null>(null).on(setCurrentUserEv, (_, payload) => payload);

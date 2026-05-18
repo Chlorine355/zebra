@@ -9,6 +9,9 @@ export const apiService = {
     users: {
         current: () => {
             return instance().get(apiLinks.users.current)
+        },
+        setNotifications: (data: { receives_notifications: boolean }) => {
+            return instance().post(apiLinks.users.notifications, data)
         }
     },
     auth: {
