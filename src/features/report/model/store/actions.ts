@@ -28,6 +28,6 @@ export const sendReportFx = createEffect(async (report: ReportDataType) => {
         type: image.type,
     })
     ) ?? [];
-    // formData.append('assets', files)
+    formData.append('assets', files)
     return (await apiService.reports.create(formData)).data
 });

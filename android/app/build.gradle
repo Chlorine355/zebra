@@ -113,14 +113,14 @@ android {
             zipAlignEnabled true
         }
     }
-    // splits {  
-    //     abi {  
-    //         reset()  
-    //         enable enableSeparateBuildPerCPUArchitecture  
-    //         include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"  
-    //         universalApk false 
-    //     }  
-    // }  
+    splits {  
+        abi {  
+            reset()  
+            enable enableSeparateBuildPerCPUArchitecture  
+            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"  
+            universalApk false 
+        }  
+    }  
     // only works with release, bundle fails
 }
 
