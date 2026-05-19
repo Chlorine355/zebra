@@ -18,12 +18,10 @@ export const sendReportFx = createEffect(async (report: ReportDataType) => {
         lat: report.coords!.lat,
         lon: report.coords!.lon,
         agree: report.agree,
+        assets: report.images?.map((image) => image.base64),
+        filenames: report.images?.map((image) => image.fileName),
     }
     const formData = new FormData();
     Object.entries(dataForSending).forEach(([key, value]) => { formData.append(key, value) })
-    // report.images?.forEach((image, index) => {
-    //     formData.append(`assets[${index}]`, image.base64)
-    // });
-    formData.append(`asset`, report.images![0].base64)
     return (await apiService.reports.create(formData)).data
 });
