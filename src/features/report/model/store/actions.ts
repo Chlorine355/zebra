@@ -21,13 +21,9 @@ export const sendReportFx = createEffect(async (report: ReportDataType) => {
     }
     const formData = new FormData();
     Object.entries(dataForSending).forEach(([key, value]) => { formData.append(key, value) })
-    const files = report.images?.map((image) =>
-    ({
-        uri: image.uri,
-        name: image.fileName,
-        type: image.type,
-    })
-    ) ?? [];
-    formData.append('assets', files)
+    // report.images?.forEach((image, index) => {
+    //     formData.append(`assets[${index}]`, image.base64)
+    // });
+    formData.append(`asset`, report.images![0].base64)
     return (await apiService.reports.create(formData)).data
 });

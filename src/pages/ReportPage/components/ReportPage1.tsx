@@ -59,7 +59,7 @@ export const ReportPage1 = () => {
             {/* TODO: opens dialog: снимок с камеры или выбрать из галереи */}
             <Button title={report.images?.length ? 'Добавить файлы' : "Приложить фото или видео"}
                 onPress={() => {
-                    launchImageLibrary({ mediaType: 'mixed', selectionLimit: 5, includeBase64: true },
+                    launchImageLibrary({ mediaType: 'photo', selectionLimit: 5, includeBase64: true, quality: 0.3 },
                         (pickerResponse) => { if (pickerResponse.assets) addImagesEv(pickerResponse.assets) })
                 }} />
         </View>

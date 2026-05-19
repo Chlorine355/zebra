@@ -33,9 +33,6 @@ export const apiService = {
                     'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data'
                 },
-                transformRequest: () => {
-                    return formdata;
-                }
             })
         },
         getAll: () => {
