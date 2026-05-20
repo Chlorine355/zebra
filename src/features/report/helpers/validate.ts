@@ -11,5 +11,7 @@ export const validateReport = (report: ReportDataType): ValidationReturnType => 
     if (!report.coords) return { isValid: false, message: 'Не указано примерное местоположение!' }
     if (!report.images?.length) return { isValid: false, message: 'Не прикреплены файлы, подтверждающие нарушение!' }
     if (!report.description) return { isValid: false, message: 'Не указано подробное описание нарушения!' }
+    if (!report.gosnomer) return { isValid: false, message: 'Не указан госномер нарушителя!' }
+
     return { isValid: true }
 }

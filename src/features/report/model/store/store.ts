@@ -9,6 +9,7 @@ const INITIAL_DATA: ReportDataType = {
     date: new Date(),
     images: null,
     description: null,
+    gosnomer: null,
     coords: null,
     agree: false,
 }

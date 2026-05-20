@@ -56,6 +56,9 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
                 {report.coords && <Marker point={report.coords} visible zIndex={1000}><Icon style={styles.marker} size={24} name="location" color={'red'} /></Marker>
                 }</Yamap>
         </View>
+         <View style={styles.item}>
+            <TextInput style={styles.textarea} value={report.gosnomer ?? ''} onChangeText={(value) => changeReportStoreEv({ gosnomer: value })} numberOfLines={1} placeholder={'Госномер нарушителя'} />
+        </View>
         <View style={styles.item}>
             <TextInput style={styles.textarea} value={report.description ?? ''} onChangeText={(value) => changeReportStoreEv({ description: value })} multiline numberOfLines={5} placeholder={'Подробное описание...'} />
         </View>

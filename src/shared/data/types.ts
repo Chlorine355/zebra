@@ -26,6 +26,7 @@ export type ReportDataType = {
     date: Date | null;
     images: Asset[] | null;
     description: string | null;
+    gosnomer: string | null;
     coords: { lat: number; lon: number } | null;
     agree: boolean;
 }

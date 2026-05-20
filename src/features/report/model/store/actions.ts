@@ -15,6 +15,7 @@ export const sendReportFx = createEffect(async (report: ReportDataType) => {
         violation: report.violation!,
         datetime: report.date!.toISOString(),
         description: report.description!,
+        gosnomer: report.description!,
         lat: report.coords!.lat,
         lon: report.coords!.lon,
         agree: report.agree,
