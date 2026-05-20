@@ -49,7 +49,6 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
                     <Text style={styles.label}>Геопозиция</Text>
                     <Yamap style={styles.map}
                         ref={mapRef}
-                        showUserPosition
                         rotateGesturesDisabled
                         mapType={'vector'}
                         fastTapDisabled={false}
