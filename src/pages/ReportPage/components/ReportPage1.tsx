@@ -39,7 +39,6 @@ export const ReportPage1 = () => {
             />
         </View>
         {report.images?.length ? <View style={[styles.item]}>
-            {/* TODO: opens dialog: снимок с камеры или выбрать из галереи */}
             <FlatList
                 data={report.images}
                 horizontal

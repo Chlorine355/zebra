@@ -1,4 +1,4 @@
-import { ScrollView, Text, TextStyle, View, ViewStyle } from "react-native"
+import { FlatList, Image, ImageStyle, ScrollView, Text, TextStyle, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../shared/assets/styles/Pages"
 import React, { useEffect, useRef, useState } from "react"
 import { RouteProp } from "@react-navigation/native"
@@ -7,8 +7,11 @@ import { loadReportData } from "./lib/helpers"
 import { StatusBadge } from "../../widgets/status/StatusBadge"
 import Yamap, { Marker, YamapRef } from "react-native-yamap-plus"
 import Icon from "react-native-vector-icons/Ionicons";
+import { REACT_APP_BACKEND_URL } from '@env'
+
 import { getDateTimeString } from "../../shared/lib/getDateTimeString"
 
+const getImageSrc = (uri: string) => `${REACT_APP_BACKEND_URL}assets/image?filename=${uri}`
 
 export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigationTemplate, 'SingleReport'> }) => {
     const { id } = route.params;
@@ -20,6 +23,7 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
         setLoading(true)
         loadReportData(id).then((response) => {
             setData(response);
+            console.log(getImageSrc(response?.assets[0].uri))
         }).finally(() => {
             setLoading(false)
         })
@@ -74,13 +78,25 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
                     <Text style={styles.label}>Госномер (автоматически)</Text>
                     <Text>{data!.gosnomer || 'Не определено'}</Text>
                 </View>
-                {/* TODO: фотки */}
+                <FlatList
+                    data={data.assets}
+                    horizontal
+                    keyExtractor={(asset) => asset.uri}
+                    renderItem={
+                        (asset) => {
+                            console.log(getImageSrc(asset.item.uri));
+                            return <View style={styles.imageContainer}>
+                                <Image style={styles.img as ImageStyle} source={{ uri: getImageSrc(asset.item.uri) }} />
+                            </View>
+                        }
+                    }
+                    contentContainerStyle={styles.images} />
             </>
         }
     </ScrollView >
 }
 
-const styles: Record<string, ViewStyle | TextStyle> = {
+const styles: Record<string, ViewStyle | TextStyle | ImageStyle> = {
     placeholder: {
         width: '100%',
         height: '100%',
@@ -108,5 +124,17 @@ const styles: Record<string, ViewStyle | TextStyle> = {
         display: 'flex',
         flexDirection: 'column',
         gap: 8,
+    },
+    img: {
+        width: 100, height: 100,
+        borderRadius: 24,
+        objectFit: 'cover'
+    },
+    images: {
+        flexDirection: 'row',
+        gap: 4,
+    },
+    imageContainer: {
+        position: 'relative'
     },
 }
