@@ -75,7 +75,7 @@ export const SingleReportPage = ({ route }: { route: RouteProp<MainStackNavigati
                     <Text>{data!.address || 'Не определено'}</Text>
                 </View>
                 <View style={styles.item}>
-                    <Text style={styles.label}>Госномер (автоматически)</Text>
+                    <Text style={styles.label}>Госномер</Text>
                     <Text>{data!.gosnomer || 'Не определено'}</Text>
                 </View>
                 <FlatList

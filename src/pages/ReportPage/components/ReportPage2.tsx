@@ -1,4 +1,4 @@
-import { Button, Text, TextInput, TextStyle, ToastAndroid, View, ViewStyle } from "react-native"
+import { Button, ScrollView, Text, TextInput, TextStyle, ToastAndroid, View, ViewStyle } from "react-native"
 import { pageStyle } from "../../../shared/assets/styles/Pages"
 import React, { useEffect, useRef } from "react"
 import { Marker, Yamap, YamapRef } from 'react-native-yamap-plus';
@@ -36,7 +36,7 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
         })
     }, [report.coords])
 
-    return <View style={{ ...pageStyle, ...styles.page }}>
+    return <ScrollView contentContainerStyle={{ ...pageStyle, ...styles.page }}>
         <View style={styles.item}>
             <Text style={styles.label}>Выберите геолокацию</Text>
             <Yamap style={styles.map}
@@ -56,7 +56,7 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
                 {report.coords && <Marker point={report.coords} visible zIndex={1000}><Icon style={styles.marker} size={24} name="location" color={'red'} /></Marker>
                 }</Yamap>
         </View>
-         <View style={styles.item}>
+        <View style={styles.item}>
             <TextInput style={styles.textarea} value={report.gosnomer ?? ''} onChangeText={(value) => changeReportStoreEv({ gosnomer: value })} numberOfLines={1} placeholder={'Госномер нарушителя'} />
         </View>
         <View style={styles.item}>
@@ -71,7 +71,7 @@ export const ReportPage2 = ({ navigation }: { navigation: LocalNavigationProp })
         <View style={styles.item}>
             <Button title={isLoading ? 'Отправка...' : "Отправить"} onPress={sendHandler} disabled={!report.agree} />
         </View>
-    </View>
+    </ScrollView>
 }
 
 const styles: Record<string, ViewStyle | TextStyle> = {
