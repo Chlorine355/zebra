@@ -34,7 +34,7 @@ export const SplashPage = ({ navigation }: { navigation: LocalNavigationProp }) 
     return <View style={styles.page}>
         <View style={styles.main}>
             <Icon name="local-police" size={180} />
-            <Text style={styles.label}>Народный инспектор</Text>
+            <Text style={styles.label}>Зебра</Text>
         </View>
     </View>
 }
