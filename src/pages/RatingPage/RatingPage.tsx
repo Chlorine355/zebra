@@ -15,7 +15,6 @@ const Item = ({ label, valueStyle, value = 0 }: { label: string, value?: number,
 }
 
 export const RatingPage = () => {
-    // TODO: in future, add global rating
     const [data, setData] = useState<StatsType | null>(null)
     const [isLoading, setLoading] = useState(true);
 

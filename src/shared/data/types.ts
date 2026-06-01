@@ -22,7 +22,7 @@ export enum ReportStatusEnum {
 }
 
 export type ReportDataType = {
-    violation: string | null; // TODO: make enum
+    violation: string | null;
     date: Date | null;
     images: Asset[] | null;
     description: string | null;
@@ -32,7 +32,7 @@ export type ReportDataType = {
 }
 
 export type ReportRequestBodyType = {
-    violation: string; // TODO: make enum
+    violation: string;
     datetime: string;
     assets: Asset[];
     description: string;
