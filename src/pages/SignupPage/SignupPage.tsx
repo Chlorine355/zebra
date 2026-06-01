@@ -7,24 +7,24 @@ import { setAuthInstanceEv } from "../../shared/api/auth/actions"
 
 
 export const SignupPage = ({ navigation }: { navigation: LocalNavigationProp }) => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
 
 
     const signup = () => {
-        apiService.auth.signup({ username, password }).then(() => {
+        apiService.auth.signup({ email, password }).then(() => {
             // on successful signup, retrieve access token, redirect to tabs
-            apiService.auth.authenticate({ username, password }).then(({ data }) => {
+            apiService.auth.authenticate({ username: email, password }).then(({ data }) => {
                 setAuthInstanceEv({
-                    username, password, token: data.access_token
+                    username: email, password, token: data.access_token
                 })
                 navigation.reset({ index: 0, routes: [{ name: 'Tabs' }] });
             })
         }).catch(() => ToastAndroid.show('Что-то пошло не так', 2000))
     }
     return <View style={styles.page}>
-        <TextInput style={styles.input} placeholder="Логин" value={username} onChangeText={setUsername} />
+        <TextInput style={styles.input} textContentType="emailAddress" placeholder="Электронная почта" value={email} onChangeText={setEmail} autoCapitalize={"none"} />
         <TextInput style={styles.input} placeholder="Пароль" secureTextEntry value={password} onChangeText={setPassword} />
         <TextInput style={styles.input} placeholder="Повторите пароль" secureTextEntry value={repeatPassword} onChangeText={setRepeatPassword} />
         <Button title='зарегистрироваться' onPress={signup} />

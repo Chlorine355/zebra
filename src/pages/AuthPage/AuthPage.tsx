@@ -20,7 +20,7 @@ export const AuthPage = ({ navigation }: { navigation: LocalNavigationProp }) =>
     }
 
     return <View style={styles.page}>
-        <TextInput style={styles.input} placeholder="Логин" value={username} onChangeText={setUsername} />
+        <TextInput style={styles.input} autoCapitalize="none" placeholder="Электронная почта" textContentType="emailAddress" value={username} onChangeText={setUsername} />
         <TextInput style={styles.input} placeholder="Пароль" secureTextEntry value={password} onChangeText={setPassword} />
         <Button title='Войти' onPress={loginAttempt} />
         <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Signup' }] })}>

@@ -22,7 +22,7 @@ export const apiService = {
                 }
             })
         },
-        signup: (data: { username: string, password: string }) => {
+        signup: (data: { email: string, password: string }) => {
             return instance().post(apiLinks.auth.signup, data,)
         }
     },
